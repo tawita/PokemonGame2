@@ -30,9 +30,9 @@ public class Command extends JFrame{
     JPanel p1,showData;
     JLabel txtSelect,pokemonIcon;
     JTextField jTextField; 
-    JButton newPokemon,eat,battle;
+    JButton newPokemon,eat,battle,evol;
     JTextArea printProFile;
-    Icon dataIcon0,dataIcon1,dataIcon2,dataIconStart;
+    Icon dataIcon0,dataIcon1,dataIcon2,dataIcon3,dataIcon4,dataIcon5,dataIconStart;
     JComboBox select;
     int squirtle,pikachu,charmander;
     String name;
@@ -45,6 +45,11 @@ public class Command extends JFrame{
     }
     public static String printStatus(ArrayList<Pokemon> pokemons,int index){
         return  pokemons.get(index).getName()+" health: "+pokemons.get(index).getHealth()+"/"+pokemons.get(index).maxHealth;
+              
+    }
+    
+    public static String printEvol(ArrayList<Pokemon> pokemons,int index){
+        return  pokemons.get(index).getName()+" health: "+(pokemons.get(index).maxHealth+100)+"/"+(pokemons.get(index).maxHealth+100);
               
     }
 
@@ -79,6 +84,9 @@ public class Command extends JFrame{
         dataIcon0 = new ImageIcon(getClass().getResource("squirtle.png"));
         dataIcon1 = new ImageIcon(getClass().getResource("pikachu.png"));
         dataIcon2 = new ImageIcon(getClass().getResource("charmander.png"));
+        dataIcon3 = new ImageIcon(getClass().getResource("blastoise.png"));
+        dataIcon4 = new ImageIcon(getClass().getResource("raichu.png"));
+        dataIcon5 = new ImageIcon(getClass().getResource("charizard.png"));
         pokemonIcon = new JLabel("");
         pokemonIcon.setIcon(dataIconStart);
          
@@ -86,6 +94,7 @@ public class Command extends JFrame{
         newPokemon = new JButton("STATUS");
         eat = new JButton("EAT");
         battle = new JButton("BATTLE");
+        evol = new JButton("EVOLUTION");
         
         //event
         newPokemon.addActionListener(new ActionListener() {
@@ -153,7 +162,56 @@ public class Command extends JFrame{
                         blue.attack(red);
                         printProFile.setText(printPokemons(pokemons,charmander));
                         break;
+                    case 1:
+                        pokemonIcon.setIcon(dataIcon1);
+                        Pokemon red1 = pokemons.get(squirtle);
+                        Pokemon blue1 = pokemons.get(pikachu);
+                        red1.attack(blue1);
+                        blue1.attack(red1);
+                        printProFile.setText(printPokemons(pokemons,charmander));
+                        break;
+                    case 2:
+                        pokemonIcon.setIcon(dataIcon2);
+                        Pokemon red2 = pokemons.get(charmander);
+                        Pokemon blue2 = pokemons.get(pikachu);
+                        red2.attack(blue2);
+                        blue2.attack(red2);
+                        printProFile.setText(printPokemons(pokemons,squirtle));
+                        break;
               }
+            }
+        });
+
+        
+        
+        evol.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch (select.getSelectedIndex()) {
+                    case 0:
+                        pokemonIcon.setIcon(dataIcon3);
+                        pokemons.add(new Squirtle());
+                        squirtle = 0;
+                        printProFile.setText(printEvol(pokemons,0));
+                        System.out.print("Squirtle"+select.getSelectedIndex());
+                        break;
+                    case 1:
+                        pokemonIcon.setIcon(dataIcon4);
+                        pokemons.add(new Pikachu());
+                        pikachu = 1;
+                        printProFile.setText(printEvol(pokemons,1));
+                        System.out.print("Pikachu"+select.getSelectedIndex());
+                        break;
+                    case 2:
+                        pokemonIcon.setIcon(dataIcon5);
+                        pokemons.add(new Charmander());
+                        charmander = 2;
+                        printProFile.setText(printEvol(pokemons,2));
+                        System.out.print("Charmander"+select.getSelectedIndex());
+                        break;
+                    default:
+                        break;
+                }
             }
         });
 
@@ -162,13 +220,12 @@ public class Command extends JFrame{
         p1.add(newPokemon);
         p1.add(eat);
         p1.add(battle);
+        p1.add(evol);
         showData.add(pokemonIcon);
         showData.add(printProFile);
         c.add(showData, BorderLayout.PAGE_START);
         c.add(p1, BorderLayout.CENTER);
-
         
-        //setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         c.setSize(1000,1000);
         pack();
