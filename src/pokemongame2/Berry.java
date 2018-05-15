@@ -38,4 +38,3 @@ public class Berry{
 		return this.restoreValue;
 	}
 }
-

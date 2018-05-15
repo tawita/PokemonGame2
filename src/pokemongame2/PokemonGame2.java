@@ -61,4 +61,3 @@ public class PokemonGame2{
             new Login();
 	}
 }
-

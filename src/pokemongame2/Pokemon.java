@@ -67,4 +67,3 @@ package pokemongame2;
 
 }
 
-

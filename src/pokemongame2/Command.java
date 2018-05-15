@@ -89,7 +89,8 @@ public class Command extends JFrame{
         dataIcon5 = new ImageIcon(getClass().getResource("charizard.png"));
         pokemonIcon = new JLabel("");
         pokemonIcon.setIcon(dataIconStart);
-         
+        
+        
         txtSelect = new JLabel("Select Pokemon : ");
         newPokemon = new JButton("STATUS");
         eat = new JButton("EAT");
@@ -180,6 +181,10 @@ public class Command extends JFrame{
                         break;
               }
             }
+
+            private String printPokemons(ArrayList<Pokemon> pokemons, int charmander) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
         });
 
         
@@ -231,5 +236,8 @@ public class Command extends JFrame{
         pack();
         setVisible(true);
     }    
-}   
 
+    private String printPokemons(ArrayList<Pokemon> pokemons, int index) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+}   

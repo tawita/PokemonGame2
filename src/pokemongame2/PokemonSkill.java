@@ -51,4 +51,3 @@ public class PokemonSkill{
 		return skill;
 	}
 }
-
