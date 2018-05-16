@@ -66,4 +66,3 @@ package pokemongame2;
 	abstract public void move();
 
 }
-

@@ -47,6 +47,3 @@ public class Login implements ActionListener{
     }
 
 }
-
-
-    

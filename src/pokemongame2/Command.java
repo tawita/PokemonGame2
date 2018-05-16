@@ -37,18 +37,23 @@ public class Command extends JFrame{
     int squirtle,pikachu,charmander;
     String name;
     
-    public static void printPokemons(ArrayList<Pokemon> pokemons){
+    public void printPokemons(ArrayList<Pokemon> pokemons){
 		System.out.println("===== Pokemon List =====");
                 pokemons.forEach((pokemon) -> {
                     System.out.println("Pokemon "+pokemon.getName()+" health: "+pokemon.getHealth()+"/"+pokemon.maxHealth);
         });
     }
-    public static String printStatus(ArrayList<Pokemon> pokemons,int index){
+    
+    public String printPokemon(int index){
+        String status = "Pokemon "+ this.pokemons.get(index).getName() + "Health: "+ this.pokemons.get(index).getHealth() + "/" + this.pokemons.get(index).maxHealth;
+        return status;
+    } 
+    public String printStatus(int index){
         return  pokemons.get(index).getName()+" health: "+pokemons.get(index).getHealth()+"/"+pokemons.get(index).maxHealth;
               
     }
     
-    public static String printEvol(ArrayList<Pokemon> pokemons,int index){
+    public String printEvol(int index){
         return  pokemons.get(index).getName()+" health: "+(pokemons.get(index).maxHealth+100)+"/"+(pokemons.get(index).maxHealth+100);
               
     }
@@ -56,7 +61,7 @@ public class Command extends JFrame{
     public void eatBerry(int index){
             Berry berry = new Berry(0);
             pokemons.get(index).eat(berry);
-            printProFile.setText(printPokemons(pokemons,index));
+            printProFile.setText(printStatus(index));
     }
 
     
@@ -78,6 +83,13 @@ public class Command extends JFrame{
         showData = new JPanel();
         showData.setLayout(new FlowLayout());
         
+        squirtle = 0;
+        pikachu = 1;
+        charmander = 2;
+        
+        pokemons.add(new Squirtle());
+        pokemons.add(new Pikachu());
+        pokemons.add(new Charmander());
         
         printProFile = new JTextArea("",20,20);
         dataIconStart= new ImageIcon(getClass().getResource("pokemon.png"));
@@ -105,22 +117,19 @@ public class Command extends JFrame{
                     case 0:
                         pokemonIcon.setIcon(dataIcon0);
                         pokemons.add(new Squirtle());
-                        squirtle = 0;
-                        printProFile.setText(printStatus(pokemons,0));
+                        printProFile.setText(printStatus(0));
                         System.out.print("Squirtle"+select.getSelectedIndex());
                         break;
                     case 1:
                         pokemonIcon.setIcon(dataIcon1);
                         pokemons.add(new Pikachu());
-                        pikachu = 1;
-                        printProFile.setText(printStatus(pokemons,1));
+                        printProFile.setText(printStatus(1));
                         System.out.print("Pikachu"+select.getSelectedIndex());
                         break;
                     case 2:
                         pokemonIcon.setIcon(dataIcon2);
                         pokemons.add(new Charmander());
-                        charmander = 2;
-                        printProFile.setText(printStatus(pokemons,2));
+                        printProFile.setText(printStatus(2));
                         System.out.print("Charmander"+select.getSelectedIndex());
                         break;
                     default:
@@ -161,7 +170,7 @@ public class Command extends JFrame{
                         Pokemon blue = pokemons.get(pikachu);
                         red.attack(blue);
                         blue.attack(red);
-                        printProFile.setText(printPokemons(pokemons,charmander));
+                        printProFile.setText(printPokemon(squirtle));
                         break;
                     case 1:
                         pokemonIcon.setIcon(dataIcon1);
@@ -169,7 +178,7 @@ public class Command extends JFrame{
                         Pokemon blue1 = pokemons.get(pikachu);
                         red1.attack(blue1);
                         blue1.attack(red1);
-                        printProFile.setText(printPokemons(pokemons,charmander));
+                        printProFile.setText(printPokemon(pikachu));
                         break;
                     case 2:
                         pokemonIcon.setIcon(dataIcon2);
@@ -177,14 +186,14 @@ public class Command extends JFrame{
                         Pokemon blue2 = pokemons.get(pikachu);
                         red2.attack(blue2);
                         blue2.attack(red2);
-                        printProFile.setText(printPokemons(pokemons,squirtle));
+                        printProFile.setText(printPokemon(squirtle));
                         break;
               }
             }
 
-            private String printPokemons(ArrayList<Pokemon> pokemons, int charmander) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
+//            private String printPokemons(ArrayList<Pokemon> pokemons, int charmander) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
         });
 
         
@@ -197,21 +206,21 @@ public class Command extends JFrame{
                         pokemonIcon.setIcon(dataIcon3);
                         pokemons.add(new Squirtle());
                         squirtle = 0;
-                        printProFile.setText(printEvol(pokemons,0));
+                        printProFile.setText(printEvol(0));
                         System.out.print("Squirtle"+select.getSelectedIndex());
                         break;
                     case 1:
                         pokemonIcon.setIcon(dataIcon4);
                         pokemons.add(new Pikachu());
                         pikachu = 1;
-                        printProFile.setText(printEvol(pokemons,1));
+                        printProFile.setText(printEvol(1));
                         System.out.print("Pikachu"+select.getSelectedIndex());
                         break;
                     case 2:
                         pokemonIcon.setIcon(dataIcon5);
                         pokemons.add(new Charmander());
                         charmander = 2;
-                        printProFile.setText(printEvol(pokemons,2));
+                        printProFile.setText(printEvol(2));
                         System.out.print("Charmander"+select.getSelectedIndex());
                         break;
                     default:
@@ -237,7 +246,5 @@ public class Command extends JFrame{
         setVisible(true);
     }    
 
-    private String printPokemons(ArrayList<Pokemon> pokemons, int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-}   
+
+}
